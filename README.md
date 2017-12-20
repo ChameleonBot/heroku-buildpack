@@ -2,9 +2,6 @@
 
 This is a Heroku buildpack for Swift apps that are powered by the Swift Package Manager.
 
-Check out the [Curassow-example-helloworld](https://github.com/kylef/Curassow-example-helloworld)
-for a fully working example that can be deployed to Heroku.
-
 ## Usage
 
 Example usage:
@@ -17,10 +14,12 @@ $ heroku create --buildpack https://github.com/ChameleonBot/heroku-buildpack.git
 
 $ git push heroku master
 remote: -----> Swift app detected
-remote: -----> Installing Swift 3.1.1
-remote: -----> Installing clang-3.7.0
-remote: -----> Building Package
-remote: -----> Copying binaries to 'bin'
+remote: -----> Installing clang 5.0.0
+remote: -----> Installing swiftenv
+remote: -----> Installing Swift 4.0
+remote: -----> Building package
+remote: -----> Installing dynamic libraries
+remote: -----> Installing binaries
 ```
 
 You can also add it to upcoming builds of an existing application:
@@ -38,8 +37,10 @@ Using the Procfile, you can set the process to run for your web server. Any
 binaries built from your Swift source using swift package manager will
 be placed in your $PATH.
 
+Example Procfile:
+
 ```swift
-web: HelloWorld --workers 3 --bind 0.0.0.0:$PORT
+web: AppName --env=production --port=$PORT
 ```
 
 ### Specify a Swift version
