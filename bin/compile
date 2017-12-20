@@ -11,8 +11,9 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
 
-DEFAULT_SWIFT_VERSION="3.1.1"
-CLANG_VERSION=3.7.0
+DEFAULT_SWIFT_VERSION="4.0.2"
+
+CLANG_VERSION=5.0.0
 SWIFT_BUILD_CONFIGURATION="release"
 SWIFT_BUILD_FLAGS=""
 
@@ -23,12 +24,12 @@ if [ -f "$ENV_DIR/SWIFT_BUILD_FLAGS" ]; then
   SWIFT_BUILD_FLAGS=`cat "$ENV_DIR/SWIFT_BUILD_FLAGS"`
 fi
 
-mkdir -p "$CACHE_DIR"
+mkdir -p "$CACHE_DIR/$STACK"
 
+source "/etc/lsb-release"
 source "$BIN_DIR/utils"
-source "$BIN_DIR/steps/swiftenv"
-source "$BIN_DIR/steps/swift"
 source "$BIN_DIR/steps/clang"
+source "$BIN_DIR/steps/swiftenv"
 source "$BIN_DIR/steps/hooks/pre_compile"
 source "$BIN_DIR/steps/swift-build"
 source "$BIN_DIR/steps/swift-install"

@@ -1,9 +1,9 @@
-if [[ ! -d "$CACHE_DIR/clang-$CLANG_VERSION" ]]; then
-  cd $CACHE_DIR
-  puts-step "Installing clang-$CLANG_VERSION"
-  mkdir -p "clang-$CLANG_VERSION"
-  curl http://llvm.org/releases/$CLANG_VERSION/clang+llvm-$CLANG_VERSION-x86_64-linux-gnu-ubuntu-14.04.tar.xz -s -L | xz -d -c | tar x -C clang-$CLANG_VERSION &> /dev/null
-  cd $BUILD_DIR
+if [[ ! -d "$CACHE_DIR/$STACK/clang-$CLANG_VERSION" ]]; then
+  puts-step "Installing clang $CLANG_VERSION"
+  mkdir -p "$CACHE_DIR/$STACK/clang-$CLANG_VERSION"
+  curl http://releases.llvm.org/$CLANG_VERSION/clang+llvm-$CLANG_VERSION-linux-x86_64-ubuntu$DISTRIB_RELEASE.tar.xz -s -L | xz -d -c | tar x -C $CACHE_DIR/$STACK/clang-$CLANG_VERSION --strip 1 &> /dev/null
+else
+  puts-step "Using cached clang-$CLANG_VERSION"
 fi
 
-export PATH="$CACHE_DIR/clang-$CLANG_VERSION/clang+llvm-$CLANG_VERSION-x86_64-linux-gnu-ubuntu-14.04/bin:$PATH"
+export PATH="$CACHE_DIR/$STACK/clang-$CLANG_VERSION/bin:$PATH"
